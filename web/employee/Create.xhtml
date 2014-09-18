@@ -12,49 +12,56 @@
             <h1>Crear Empleado</h1>
             <form jsf:id="createForm">
                 <h:panelGrid columns="3">
-                    <label>ID</label>
+                    <label>ID:</label>
                     <input type="number" jsf:id="idInputText" jsf:required="true"
-                                 jsf:requiredMessage="Por favor ingrese un ID"
-                                 jsf:validatorMessage="Por favor ingrese un ID entre 1 y 999"
-                                 jsf:converterMessage="Use solo números entre 1 y 999, ej:100"
-                                 jsf:value="#{employeeController.empleadoActual.id}">
+                           jsf:requiredMessage="Por favor ingrese un id"
+                           jsf:validatorMessage="Por favor ingrese un id entre 1 y 999"
+                           jsf:converterMessage="Use solo números, ej: 100"
+                           jsf:value="#{employeeController.empleadoActual.id}">
                         <f:validateLongRange minimum="1" maximum="999"/>
                         <f:ajax execute="@this" render="idMessage"/>
                     </input>
                     <h:message id="idMessage" for="idInputText" styleClass="error"/>
 
-                    <h:outputLabel value="nombre"></h:outputLabel>
-                    <h:inputText id="nombreInputText" required="true"
-                                 requiredMessage="Por favor ingrese el nombre"
-                                 validatorMessage="Use solo letras, ej: Leo"
-                                 value="#{employeeController.empleadoActual.firstName}" maxlength="30">
-                        <f:validateRegex pattern="[a-zA-Z áéíóúAÉÍÓÚÑñ]*"/>
+                    <label>Nombre</label>
+                    <input type="text" jsf:id="nombreInputText" jsf:required="true"
+                           jsf:requiredMessage="Por favor ingrese el nombre"
+                           jsf:validatorMessage="Use solo letras, ej: Leo"
+                           jsf:value="#{employeeController.empleadoActual.firstName}" maxlength="30">
+                        <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
                         <f:ajax execute="@this" render="nombreMessage"/>
-                    </h:inputText>
+                    </input>
                     <h:message id="nombreMessage" for="nombreInputText" styleClass="error"/>
 
-                    <h:outputLabel value="Apellido"></h:outputLabel>
-                    <h:inputText id="apellidoInputText" required="true"
+                    <h:outputText value="Last name:"/>
+                    <h:inputText id="lastNameInputText" required="true"
                                  requiredMessage="Por favor ingrese el apellido"
-                                 value="#{employeeController.empleadoActual.lastName}"
-                                 maxlength="20">
+                                 validatorMessage="Use solo letras, ej: Moreno"
+                                 value="#{employeeController.empleadoActual.lastName}" maxlength="30">
+                        <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
+                        <f:ajax execute="@this" render="lastNameMessage"/>
                     </h:inputText>
-                    <h:message for="apellidoInputText" styleClass="error"/>
+                    <h:message id="lastNameMessage" for="lastNameInputText" styleClass="error"/>
 
-                    <h:outputLabel value="Fecha Nacimiento"></h:outputLabel>
-                    <h:inputText id="fechaInputText" required="true"
-                                 requiredMessage="Por favor ingrese fecha de nacimiento"
-                                 value="#{employeeController.empleadoActual.birthDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy"/>
-                    </h:inputText>                
-                    <h:message for="fechaInputText" styleClass="error"/>
+                    <label>Fecha de Nacimiento:</label>
+                    <input type="date" jsf:id="fechaInputText" jsf:required="true"
+                                 jsf:requiredMessage="Por favor ingrese la fecha de nacimiento"
+                                 jsf:value="#{employeeController.empleadoActual.birthDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                        <f:ajax execute="@this" render="fechaMessage"/>
+                    </input>
+                    <h:message id="fechaMessage" for="fechaInputText" styleClass="error"/>
 
-                    <h:outputLabel value="Salario"></h:outputLabel>
-                    <h:inputText id="salarioInputText" required="true"
+                    <h:outputText value="Salario:"/>
+                    <h:inputText id="salaryInputText" required="true"
                                  requiredMessage="Por favor ingrese el salario"
-                                 value="#{employeeController.empleadoActual.salary}">                    
+                                 validatorMessage="Ingrese un salario valido, debe ser mayor a cero"
+                                 converterMessage="Use solo números y un punto para separar decimales, ej: 120000.34"
+                                 value="#{employeeController.empleadoActual.salary}">
+                        <f:validateDoubleRange minimum="1"/>
+                        <f:ajax execute="@this" render="salaryMessage"/>
                     </h:inputText>
-                    <h:message for="salarioInputText" styleClass="error"/> 
+                    <h:message id="salaryMessage" for="salaryInputText" styleClass="error"/>
                 </h:panelGrid>
                 <h:commandButton value="Guardar" action="#{employeeController.addEmployee}"/>
                 <h:button value="Cancelar" outcome="List"/>
