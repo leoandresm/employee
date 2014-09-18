@@ -10,9 +10,9 @@
         <ui:define name="title">Crear Empleado</ui:define>        
         <ui:define name="body">
             <h1>Crear Empleado</h1>
-            <form jsf:id="createForm">
-                 <h:panelGrid columns="3">
-                    <label>ID:</label>
+            <form jsf:id="createEmployeeForm">
+                <h:panelGrid columns="3">
+                    <label for="idInputText">ID:</label>
                     <input type="number" jsf:id="idInputText" required="true"
                            jsf:requiredMessage="Por favor ingrese un id"
                            jsf:validatorMessage="Por favor ingrese un id entre 1 y 999"
@@ -23,17 +23,17 @@
                     </input>
                     <h:message id="idMessage" for="idInputText" styleClass="error"/>
 
-                    <label>Nombres:</label>
+                    <label for="nombreInputText">Nombres:</label>
                     <input type="text" jsf:id="nombreInputText" required="true"
                            jsf:requiredMessage="Por favor ingrese el nombre"
-                           jsf:validatorMessage="Use solo letras, ej: Leo"
+                           jsf:validatorMessage="Use solo letras, ej: Leo" placeholder="Nombres"
                            jsf:value="#{employeeController.empleadoActual.firstName}" maxlength="30">
                         <f:validateRegex pattern="[a-zA-Z áéíóúÁÉÍÓÚÑñ]*"/>
                         <f:ajax execute="@this" render="nombreMessage"/>
                     </input>
                     <h:message id="nombreMessage" for="nombreInputText" styleClass="error"/>
 
-                    <label>Apellidos:</label>
+                    <label for="lastNameInputText">Apellidos:</label>
                     <input type="text" jsf:id="lastNameInputText" required="true"
                                  jsf:requiredMessage="Por favor ingrese el apellido"
                                  jsf:validatorMessage="Use solo letras, ej: Moreno"
@@ -43,7 +43,7 @@
                     </input>
                     <h:message id="lastNameMessage" for="lastNameInputText" styleClass="error"/>
 
-                    <label>Fecha de Nacimiento:</label>
+                    <label for="fechaInputText">Fecha de Nacimiento:</label>
                     <input type="date" jsf:id="fechaInputText" required="true"
                                  jsf:requiredMessage="Por favor ingrese la fecha de nacimiento"
                                  jsf:value="#{employeeController.empleadoActual.birthDate}">
@@ -52,7 +52,7 @@
                     </input>
                     <h:message id="fechaMessage" for="fechaInputText" styleClass="error"/>
 
-                    <label>Salario:</label>
+                    <label for="salaryInputText">Salario:</label>
                     <input type="number" jsf:id="salaryInputText" required="true"
                                  jsf:requiredMessage="Por favor ingrese el salario"
                                  jsf:validatorMessage="Ingrese un salario valido, debe ser mayor a cero"
